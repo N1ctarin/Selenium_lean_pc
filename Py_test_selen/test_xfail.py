@@ -1,5 +1,3 @@
-from email.policy import strict
-
 import pytest
 
 @pytest.mark.xfail(strict = True)
