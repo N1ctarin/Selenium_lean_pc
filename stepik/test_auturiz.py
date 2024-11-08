@@ -3,7 +3,11 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import json
+import math
 
+from lessons.lesson_1 import button
+
+answer = math.log(int(time.time()))
 
 @pytest.fixture(scope="session")
 def load_config():
@@ -27,6 +31,11 @@ class TestLogin:
         password.send_keys(password_stepik)
         button_1 = browser.find_element(By.CLASS_NAME, 'button_with-loader')
         button_1.click()
-        time.sleep(5)
+        time.sleep(2)
 
+        pole_input = browser.find_element(By.TAG_NAME, 'textarea')
+        pole_input.send_keys(answer)
+        button_2 = browser.find_element(By.CLASS_NAME, 'submit-submission')
+        button_2.click()
+        time.sleep(10)
 
