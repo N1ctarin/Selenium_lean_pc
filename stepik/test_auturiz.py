@@ -14,12 +14,14 @@ def load_config():
         config = json.load(config_file)
         return config
 
+
 class TestLogin:
-    def test_authorization(self, browser, load_config):
+    @pytest.mark.parametrize("number", ["236896", "236897", "236898", "236899", "236903", "236904", "236905"])
+    def test_authorization(self, browser, load_config, number):
         login_stepik = load_config['email']
         password_stepik = load_config['password']
 
-        link = "https://stepik.org/lesson/236895/step/1"
+        link = f"https://stepik.org/lesson/{number}/step/1"
 
         browser.get(link)
         browser.implicitly_wait(5)
