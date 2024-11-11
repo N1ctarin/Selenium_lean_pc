@@ -1,4 +1,5 @@
 import time
+from time import sleep
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -32,13 +33,18 @@ class TestLogin:
         password.send_keys(password_stepik)
         button_1 = browser.find_element(By.CSS_SELECTOR, ".button_with-loader")
         button_1.click()
-        time.sleep(4)
+        sleep(4)
         answer = math.log(int(time.time()))
 
         pole_input = browser.find_element(By.CSS_SELECTOR, ".textarea")
         pole_input.click()
         pole_input.send_keys(answer)
+        sleep(2)
         button_2 = browser.find_element(By.CSS_SELECTOR, ".submit-submission")
         button_2.click()
-        time.sleep(5)
+        browser.implicitly_wait(5)
+        pole_anwser = str(browser.find_element(By.CSS_SELECTOR, ".smart-hints__hint").text)
+        sleep(5)
+        if pole_anwser != "Correct!":
+            print(pole_anwser)
 
