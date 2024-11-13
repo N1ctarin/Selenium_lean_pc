@@ -1,23 +1,22 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default=None,
-                     help="Choose browser: es or fr")
+    parser.addoption('--language', action='store', default='es',
+                     help="Choose: es or fr")
 
 
 @pytest.fixture(scope="function")
 def browser(request):
-    browser_language = request.config.getoption("language")
+    user_language = request.config.getoption("language")
     browser = None
-    if browser_language == "es":
-        print("\nstart es browser for test..")
-        browser = webdriver.Chrome()
-    elif browser_language == "fr":
-        print("\nstart fr browser for test..")
-        browser = webdriver.Firefox()
-    else:
-        raise pytest.UsageError("--browser_name should be chrome or firefox")
+    options = Options()
+    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    browser = webdriver.Chrome(options=options)
     yield browser
+
+assert if options == "es":
+
     print("\nquit browser..")
     browser.quit()
