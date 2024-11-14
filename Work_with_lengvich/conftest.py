@@ -12,11 +12,8 @@ def browser(request):
     user_language = request.config.getoption("language")
     browser = None
     options = Options()
-    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    options.add_experimental_option('prefs', {'intl.content-language': user_language})
     browser = webdriver.Chrome(options=options)
     yield browser
-
-assert if options == "es":
-
     print("\nquit browser..")
     browser.quit()
